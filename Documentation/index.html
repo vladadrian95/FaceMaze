@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>FaceMaze Beta</title>
+    <link rel="stylesheet" href="scholarly.css">
+    <link rel="stylesheet" href="node_modules/prismjs/themes/prism-coy.css">
+    <script src="node_modules/prismjs/prism.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <p class="title">FaceMaze</p>
+      <p class="subtitle">MCSGA</p>
+    </header>
+    <article id="echipa" typeof="schema:ScholarlyArticle" resource="#">
+      <h1>Echipa</h1>
+      <section>
+        <ol>
+          <li property="schema:author" typeof="sa:ContributorRole">
+            <a property="schema:author" href="https://www.facebook.com/https://www.facebook.com/vlad.iacobet/" typeof="schema:Person">
+              <span property="schema:familyName">Iacobeț</span>
+              <span property="schema:givenName">Vlad Adrian</span>
+            </a>
+          </li>
+          <li property="schema:author" typeof="sa:ContributorRole">
+            <a property="schema:author" href="https://www.facebook.com/ilies.norbert/" typeof="schema:Person">
+              <span property="schema:familyName">Ilieș</span>
+              <span property="schema:givenName">Norbert Mario</span>
+            </a>
+          </li>
+          <li property="schema:author" typeof="sa:ContributorRole">
+            <a property="schema:author" href="https://www.facebook.com/dorin.edu/" typeof="schema:Person">
+              <span property="schema:familyName">Edu</span>
+              <span property="schema:givenName">Dorin</span>
+            </a>
+          </li>
+        </ol>
+        <ol>
+          <li id="fii">
+            <a href="http://infi.uaic.ro/" typeof="schema:Corporation">
+              <span property="schema:name">FII</span>
+            </a>
+          </li>
+        </ol>
+      </section>
+
+      <section id="intro">
+        <h1>Introducere</h1>
+        <p>
+          FaceMaze este un joc web, bazat pe legendarul Pac-Man, care a devenit hit direct la lansare. Considerat imaginea anilor 80, Pac-Man reprezintă o legendă a jocurilor video. Inițial fiind un joc de tipul arcade ce se putea juca doar pe o cutie imensă, de-a lungul anilor acesta a fost portat pe diverse console de jocuri video sau device-uri, iar în zilele noastre a ajuns să poată fi jucat în browser. FazeMaze își propune o variantă mai interactivă, integrând noi funcționalități sociale conceptului de Pac-Man clasic.
+        </p>
+      </section>
+      <section id="scop">
+        <h1>Scop/Public țintă</h1>
+        <p>
+          <strong>Scopul</strong> acestei aplicații web este de a oferi posibilitatea de a descoperi jocul Pac-Man într-o forma mai interactivă, cu o experiență de joc personalizată fiecarui utilizator.
+        </p>
+          <strong>Publicul țintă</strong> este format din toate tipurile de gameri, ocazionali sau pasionați.
+        </p>
+      </section>
+      <section typeof="sa:Abstract" id="scop">
+        <h1>Mod de utilizare prevăzut</h1>
+          <figure typeof="sa:Image">
+            <img src="img/loginPage.png" width="880" height="655">
+            <figcaption>
+              <p>
+                Interfața de login a unui utilizator, prevazută cu opțiunea de a se conecta cu informațiile contului acestuia de pe una din rețelele de socializare aferente.
+              </p>
+              <ul>
+                <li><code>Username</code>: Utilizatorul va scrie numele de utilizator cu care este înregistrat în baza noastră de date.</li>
+                <li><code>Password</code>: Acesta va introduce parola contului respectiv.</li>
+              </ul>
+              <p>
+                În cazul în care utilizatorul dorește să se înregistreze în baza noastră de date cu un cont nou (apăsând butonul <code>Register Now</code>), acesta va fi redirecționat către o nouă pagină.
+              </p>
+            </figcaption>
+          </figure>
+          <figure typeof="sa:Image">
+            <img src="img/registerPage.png" width="880" height="655">
+            <figcaption>
+              <ul>
+                <li><code>Username</code>: Utilizatorul scrie numele pe care acesta îl dorește pentru contul sau.</li>
+                <li><code>E-mail</code>: Câmpul care cere adresa de e-mail asociată contului respectiv.</li>
+                <li><code>Password</code>: Câmpul care cere adresa de e-mail asociată contului respectiv.</li>
+                <li><code>Confirm password</code>: Un camp care trebuie să fie identic cu cel anterior pentru a evita cât mai multe erori de scriere a acesteia (aceste câmpuri fiind criptate la scris).</li>
+              </ul>
+            </figcaption>
+          </figure>
+
+            <figure typeof="sa:Image">
+            <p>
+            După ce utilizatorul este logat, acesta va putea să pornească un joc de FaceMaze, cu labirint generat aleatoriu, unde fantomele sunt prieteni de pe rețeaua de socializare utilizată pentru a se loga sau cu fantome clasice în cazul în care este logat cu ajutorul bazei noastre de date.
+            </p>
+            <img src="img/labirynthPage.png" width="880" height="655">
+          </figure>  
+      </section>
+
+      <section id="arhi">
+        <h1>Arhitectura aplicației și etape de dezvoltare</h1>
+        <p>
+          Aplicația Web FaceMaze va implementa o arhitecură bazată pe șablonul MVC (Model – View – Controller). Pentru a realiza această implementare se va utiliza CodeIgniter, un framework de PHP lansat în 2006 care în prezent are o reputație foarte bună când vine vorba de performanță și de modul ușor în care poate fi utilizat. Astfel, aplicația va fi împărțită în trei mari module ce urmează să fie implememtate:
+        </p>
+        <ul>
+          <li>
+            <code>Controller</code> reprezintă nucleul aplicației, având rolul de a stabili legătura dintre Model și View, fiind necesar pentru a procesa cererile de tipul POST/GET.
+          </li>
+          <li>
+            <code>Model</code> reprezintă partea logică a aplicației, având rolul de a gestiona resursele aplicației precum baza de date utilizată pentru a stoca informații despre utilizatori. De asemenea, tot aici vor fi implementate diverse clase PHP ce descriu mecanica jocului (generarea labirintului, condițiile pentru a căștiga, comportamentul personajelor).
+          </li>
+          <li>
+            <code>View</code> reprezintă partea de front-end prin care utilizatorul va putea să interacționeze cu aplicația. Conține fișiere HTML, CSS și JavaScript. Pe partea de front-end se va oferi un design responsive.
+          </li>
+        </ul>
+        <p>
+          În general, organizarea aplicației va fi influențată puternic de framework-ul CodeIgniter. Structura framework-ul CodeIgniter se împarte în trei foldere principale:
+        </p>
+        <ul>
+          <li>
+            <code>application</code> conține codul sursă al aplicației ce va fi împărțit pe module cum ar fi controllers, models, views, language, etc.
+          </li>
+          <li>
+            <code>system</code> conține codul sursă al framework-ului CodeIgniter.
+          </li>  
+          <li>
+            <code>user_guide</code> conține user guide-ul framework-ului.
+          </li>
+        </ul>
+        <p>
+          Principalele etape de dezvoltare a aplicației sunt următoarele (nu neapărat în această ordine):
+        </p>
+        <ul>
+          <li>
+            Proiectarea bazei de date Oracle 12c ce va stoca diverse informații despre useri (user, parolă, email, cel mai bun scor, ultimul scor). Această etapă presupune atât construirea bazei de date, cât și implementarea unei clase PHP ce are ca rol comunicarea cu baza de date.
+          </li>
+          <li>
+            Implementarea unor clase PHP ce descriu diverse componente ale jocului FaceMaze, cum ar fi labirintul generat aleatoriu, personajul controlat de jucător, personajele „rele”, condițiile pentru a căștiga, etc.
+          </li>  
+          <li>
+            Realizarea componentei de front-end prin care user-ul va interacționa cu aplicația. Partea de front-end va avea un design responsive.
+          </li>
+          <li>
+            Implementarea unor API-uri precum Facebook sau Twitter cu rolul de a permite user-ului să se logheze folosindu-și contul de pe rețeaua socială respectivă și de a beneficea de o experiență de joc superioară datorită anumitor informații legate de contul său de socializare, informații ce vor fi folosite în joc (precum înlocuirea personajului principal din joc cu poza de profil de pe Facebook a jucătorului). De asemenea, aplicația va putea posta pe Twitter anumite mesaje generate automat.
+          </li>
+          <li>
+            Implementarea formularelor de login și de register.
+          </li>
+          <li>
+            Implementarea unui Controller care să stabilească legătura dintre partea logică și partea vizuală.
+          </li>
+        </ul>                
+      </section>
+      <section id="api">
+        <h1>API-uri utilizate</h1>
+        <section id="fcb">
+          <h3>Facebook Graph API</h3>
+          <p>
+          API-ul Facebook va fi folosit pentru logarea cu contul de Facebook și pentru a prelua poza de profil a utilizatorului, plus pozele de profil a unor prieteni, poze ce vor înlocui personajele din Pac-Man: poza de profil a jucătorului va înlocui personajul Pac-Man iar pozele de profil a prietenilor vor înlocui fantomele din joc.
+          </p>
+          <p>
+            Următorul request este utilizat pentru a obține informații de bază despre jucător (id, nume și poză de profil):
+          </p>
+          <p>
+            <code>GET graph.facebook.com/me?fields=id,name,picture</code>
+          </p>
+          <p>
+            Următorul request este utilizat pentru a obține lista de prieteni a jucătorului:
+          </p>
+          <p>
+            <code>GET graph.facebook.com/me/friends</code>
+          </p>
+          <p>
+            Următorul request este utilizat pentru a obține poza de profil a unui prieten:
+          </p>
+          <p>
+            <code>GET graph.facebook.com/{user-id}/picture</code>
+          </p>
+        </section>  
+        <section id="twt">
+          <h3>Twitter API</h3>
+          <p>
+          API-ul de Twitter va fi folosit în aceași manieră ca API-ul de Facebook dar va permite și postarea unor mesaje generate automat atunci când o fantomă a atins jucătorul, precum "Jucand #FaceMaze, l-am inghitit pe @utilizator".
+          </p>
+          <p>
+            Pentru login se utilizează următorul request:
+          <p>
+            <code>GET https://api.twitter.com/1.1/account/verify_credentials.json</code>
+          </p>
+          <p>
+            Pentru a posta un tweet se utilizează următorul request:
+          </p>
+          <p>
+            <code>POST https://api.twitter.com/1.1/statuses/update.json?status={mesaj}</code>
+          </p>
+          <p>
+            Pentru a obține informații de bază legate de jucător se utilizează următorul request:
+          </p>
+          <p>
+            <code>GET https://api.twitter.com/1.1/users/show.json?screen_name={username}</code>
+          </p>
+          <p>
+            Pentru a obține lista cu prieteni (utilizatori de Twitter pe care jucătorul îi urmărește) se utilizează următorul request:
+          </p>
+          <p>
+            <code>GET https://api.twitter.com/1.1/friends/list.json?screen_name={username}</code>
+          </p>
+        </section>  
+      </section> 
+      <section id="concluzie">
+        <h2>Concluzie</h2>
+        <p>
+          Prin FaceMaze am dorit să realizăm un joc pentru toată lumea, dedicat relaxării și amuzamentului, care să se diferențeze de alte implementări ale jocului Pac-Man prin caracterul social al jocului. Astfel, jucătorii vor putea să înlocuiască clasicele personaje ale jocului Pac-Man cu prietenii lor de pe rețelele de socializare iar faptul că vor putea posta mesaje legate de activitatea lor din joc va atrage noi jucători. Datorită design-ului responsive, jocul va putea fi jucat pe o varietate largă de device-uri.
+        </p>
+      </section>       
+    </article>
+    <footer>
+      <p>
+        work in progres  ✕
+        <a href="https://github.com/vladadrian95/FaceMaze">GitHub FazeMaze Project</a>
+      </p>
+    </footer>
+  </body>
+</html>
