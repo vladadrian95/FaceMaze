@@ -1,5 +1,11 @@
+
+About FaceMaze
+##############
+
+FaceMaze is a web application made for the "Web Technologies" course held by Sabin Buraga at Faculty of Computer Science, Iasi. It is a web implementation of the popular PacMan video game and integrates some awesome social features such as the possibility of replacing the game's ghosts with the profile pictures of your Facebook friends. The app will also be built with a responsive design in mind.
+
 ###################
-What is CodeIgniter
+About CodeIgniter
 ###################
 
 CodeIgniter is an Application Development Framework - a toolkit - for people
