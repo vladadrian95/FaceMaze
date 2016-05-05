@@ -2,9 +2,9 @@
 
 class User_Model extends CI_Model {
 
-	/**
-	* Call parent's constructor
-	*/
+	  /**
+	  * Call parent's constructor
+	  */
    	public function __construct() {
    	   	parent::__construct();
    	}
@@ -20,12 +20,12 @@ class User_Model extends CI_Model {
    			return "Failed to connect to data base";
    		}  
    		$sql = "BEGIN FaceMaze_Pack.insert_regular_user(:bind1, :bind2, :bind3, :bind4); END;";
-   		$querry = oci_parse($conn, $sql);
-   		oci_bind_by_name($querry, ":bind1", $data['mail']);
-        oci_bind_by_name($querry, ":bind2", $data['username']);
-        oci_bind_by_name($querry, ":bind3", $data['password']);
-        oci_bind_by_name($querry, ":bind4", $message, 128);
-   		oci_execute($querry);
+   		$query = oci_parse($conn, $sql);
+   		oci_bind_by_name($query, ":bind1", $data['mail']);
+      oci_bind_by_name($query, ":bind2", $data['username']);
+      oci_bind_by_name($query, ":bind3", $data['password']);
+      oci_bind_by_name($query, ":bind4", $message, 128);
+   		oci_execute($query);
    		oci_close($conn);
    		return $message;
    	}
@@ -41,12 +41,12 @@ class User_Model extends CI_Model {
    			return "Failed to connect to data base";
    		}  
    		$sql = "BEGIN FaceMaze_Pack.insert_fb_user(:bind1, :bind2, :bind3, :bind4); END;";
-   		$querry = oci_parse($conn, $sql);
-   		oci_bind_by_name($querry, ":bind1", $data['mail']);
-        oci_bind_by_name($querry, ":bind2", $data['username']);
-        oci_bind_by_name($querry, ":bind3", $data['real_name']);
-        oci_bind_by_name($querry, ":bind4", $message, 128);
-   		oci_execute($querry);
+   		$query = oci_parse($conn, $sql);
+   		oci_bind_by_name($query, ":bind1", $data['mail']);
+      oci_bind_by_name($query, ":bind2", $data['username']);
+      oci_bind_by_name($query, ":bind3", $data['real_name']);
+      oci_bind_by_name($query, ":bind4", $message, 128);
+   		oci_execute($query);
    		oci_close($conn);
    		return $message;
    	}
@@ -62,12 +62,12 @@ class User_Model extends CI_Model {
    			return "Failed to connect to data base";
    		}  
    		$sql = "BEGIN FaceMaze_Pack.insert_tw_user(:bind1, :bind2, :bind3, :bind4); END;";
-   		$querry = oci_parse($conn, $sql);
-   		oci_bind_by_name($querry, ":bind1", $data['mail']);
-        oci_bind_by_name($querry, ":bind2", $data['username']);
-        oci_bind_by_name($querry, ":bind3", $data['real_name']);
-        oci_bind_by_name($querry, ":bind4", $message, 128);
-   		oci_execute($querry);
+   		$query = oci_parse($conn, $sql);
+   		oci_bind_by_name($query, ":bind1", $data['mail']);
+      oci_bind_by_name($query, ":bind2", $data['username']);
+      oci_bind_by_name($query, ":bind3", $data['real_name']);
+      oci_bind_by_name($query, ":bind4", $message, 128);
+   		oci_execute($query);
    		oci_close($conn);
    		return $message;
    	}
@@ -83,11 +83,11 @@ class User_Model extends CI_Model {
    			return "Failed to connect to data base";
    		}  
    		$sql = "BEGIN :result := FaceMaze_Pack.check_login(:bind1, :bind2); END;";
-   		$querry = oci_parse($conn, $sql);
-   		oci_bind_by_name($querry, ":bind1", $data['mail']);
-        oci_bind_by_name($querry, ":bind2", $data['password']);
-        oci_bind_by_name($querry, ":result", $message, 32);
-   		oci_execute($querry);
+   		$query = oci_parse($conn, $sql);
+   		oci_bind_by_name($query, ":bind1", $data['mail']);
+      oci_bind_by_name($query, ":bind2", $data['password']);
+      oci_bind_by_name($query, ":result", $message, 32);
+   		oci_execute($query);
    		oci_close($conn);
    		return $message;
    	}
@@ -102,11 +102,11 @@ class User_Model extends CI_Model {
    			return "Failed to connect to data base";
    		}  
    		$sql = "BEGIN :result := FaceMaze_Pack.get_high_score(:bind1, :bind2); END;";
-   		$querry = oci_parse($conn, $sql);
-   		oci_bind_by_name($querry, ":bind1", $data['mail']);
-        oci_bind_by_name($querry, ":bind2", $data['type']);
-        oci_bind_by_name($querry, ":result", $message, 32);
-   		oci_execute($querry);
+   		$query = oci_parse($conn, $sql);
+   		oci_bind_by_name($query, ":bind1", $data['mail']);
+      oci_bind_by_name($query, ":bind2", $data['type']);
+      oci_bind_by_name($query, ":result", $message, 32);
+   		oci_execute($query);
    		oci_close($conn);
    		return $message;
    	}
@@ -121,11 +121,11 @@ class User_Model extends CI_Model {
    			return "Failed to connect to data base";
    		}  
    		$sql = "BEGIN :result := FaceMaze_Pack.get_last_score(:bind1, :bind2); END;";
-   		$querry = oci_parse($conn, $sql);
-   		oci_bind_by_name($querry, ":bind1", $data['mail']);
-        oci_bind_by_name($querry, ":bind2", $data['type']);
-        oci_bind_by_name($querry, ":result", $message, 32);
-   		oci_execute($querry);
+   		$query = oci_parse($conn, $sql);
+   		oci_bind_by_name($query, ":bind1", $data['mail']);
+      oci_bind_by_name($query, ":bind2", $data['type']);
+      oci_bind_by_name($query, ":result", $message, 32);
+   		oci_execute($query);
    		oci_close($conn);
    		return $message;
    	}
@@ -141,11 +141,11 @@ class User_Model extends CI_Model {
    			return "Failed to connect to data base";
    		}  
    		$sql = "BEGIN FaceMaze_Pack.delete_user(:bind1, :bind2, :bind3); END;";
-   		$querry = oci_parse($conn, $sql);
-   		oci_bind_by_name($querry, ":bind1", $data['mail']);
-        oci_bind_by_name($querry, ":bind2", $data['type']);
-        oci_bind_by_name($querry, ":bind3", $message, 128);
-   		oci_execute($querry);
+   		$query = oci_parse($conn, $sql);
+   		oci_bind_by_name($query, ":bind1", $data['mail']);
+      oci_bind_by_name($query, ":bind2", $data['type']);
+      oci_bind_by_name($query, ":bind3", $message, 128);
+   		oci_execute($query);
    		oci_close($conn);
    		return $message;
    	}
@@ -161,12 +161,12 @@ class User_Model extends CI_Model {
    			return "Failed to connect to data base";
    		}  
    		$sql = "BEGIN FaceMaze_Pack.update_high_score(:bind1, :bind2, :bind3, :bind4); END;";
-   		$querry = oci_parse($conn, $sql);
-   		oci_bind_by_name($querry, ":bind1", $data['mail']);
-        oci_bind_by_name($querry, ":bind2", $data['type']);
-        oci_bind_by_name($querry, ":bind3", $data['score']);
-        oci_bind_by_name($querry, ":bind4", $message, 128);
-   		oci_execute($querry);
+   		$query = oci_parse($conn, $sql);
+   		oci_bind_by_name($query, ":bind1", $data['mail']);
+      oci_bind_by_name($query, ":bind2", $data['type']);
+      oci_bind_by_name($query, ":bind3", $data['score']);
+      oci_bind_by_name($query, ":bind4", $message, 128);
+   		oci_execute($query);
    		oci_close($conn);
    		return $message;
    	}
@@ -182,12 +182,12 @@ class User_Model extends CI_Model {
    			return "Failed to connect to data base";
    		}  
    		$sql = "BEGIN FaceMaze_Pack.update_last_score(:bind1, :bind2, :bind3, :bind4); END;";
-   		$querry = oci_parse($conn, $sql);
-   		oci_bind_by_name($querry, ":bind1", $data['mail']);
-        oci_bind_by_name($querry, ":bind2", $data['type']);
-        oci_bind_by_name($querry, ":bind3", $data['score']);
-        oci_bind_by_name($querry, ":bind4", $message, 128);
-   		oci_execute($querry);
+   		$query = oci_parse($conn, $sql);
+   		oci_bind_by_name($query, ":bind1", $data['mail']);
+      oci_bind_by_name($query, ":bind2", $data['type']);
+      oci_bind_by_name($query, ":bind3", $data['score']);
+      oci_bind_by_name($query, ":bind4", $message, 128);
+   		oci_execute($query);
    		oci_close($conn);
    		return $message;
    	}

@@ -24,8 +24,8 @@ class Welcome extends CI_Controller {
 		    echo $row['HIGH_SCORE'];
 		    echo '<br>';
 		}
-		$this->add_user();
-		echo '<br>';
+		//$this->add_user();
+		//echo '<br>';
 	}
 
 	/**
