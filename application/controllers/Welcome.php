@@ -10,22 +10,24 @@ class Welcome extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->database();
+		$this->load->model('User_Model');
 	}
 
 	/**
 	 * Index Page for this controller
 	 */
 	public function index() {
-		$this->load->view('welcome_message');
-		$query = $this->db->query('SELECT * FROM FaceMaze_Users ORDER BY high_score DESC');
-		foreach ($query->result_array() as $row) {
-		    echo $row['MAIL_ADDRESS'];
-		    echo ' ';
-		    echo $row['HIGH_SCORE'];
-		    echo '<br>';
-		}
-		//$this->add_user();
-		//echo '<br>';
+		$user_data = array(
+			'mail'=>'vladadrian95@gmail.com',
+			'type'=>'1'
+			);
+		$high_score = $this->User_Model->get_high_score($user_data);
+		$last_score = $this->User_Model->get_last_score($user_data);
+		$data = array(
+			'high_score'=>$high_score,
+			'last_score'=>$last_score
+			);
+		$this->load->view('game_view', $data);
 	}
 
 	/**
