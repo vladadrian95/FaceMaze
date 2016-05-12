@@ -3,10 +3,13 @@
  
    <head> 
       <meta charset = "utf-8"> 
-      <title>Game view</title> 
+      <title>FaceMaze</title> 
    </head> 
 	
-   <body> 
+   <body>
+      <form action="<?php echo 'http://localhost/FaceMaze/index.php/Main_Controller/logout'; ?>">
+         <button type="submit">Logout</button>
+      </form>
       <?php
          echo "User's high score is ";
          echo $high_score;
