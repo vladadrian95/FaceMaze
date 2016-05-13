@@ -10,7 +10,6 @@ class Main_Controller extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->database();
-		$this->load->model('User_Model');
 	}
 
 	/**
@@ -37,11 +36,11 @@ class Main_Controller extends CI_Controller {
 			$this->load->view('login_view');
 		} else { 
 			$user_data=array( 
-				'mail' => $this->input->post('email'), 
-				'password' => $this->input->post('password'),
-				'type' => '1'
+				'email' => $this->input->post('email'), 
+				'password' => $this->input->post('password')
 				);
-			$login_result = $this->User_Model->login($user_data);
+			$this->load->model('Regular_User');
+			$login_result = $this->Regular_User->login($user_data);
 			if ($login_result === "1") {
 				$this->session->set_userdata('userlogin',$user_data);
 				$this->enterGame();
@@ -72,11 +71,12 @@ class Main_Controller extends CI_Controller {
 			$this->load->view('login_view');
 		} else if ($pass1 === $pass2) {
 			$user_data = array(
-				'mail' => $this->input->post('register_email'),
+				'email' => $this->input->post('register_email'),
 				'password' => $pass1,
 				'username' => $this->input->post('register_user') 
 				);
-			$status_message = $this->User_Model->insert_regular_user($user_data);
+			$this->load->model('Regular_User');
+			$status_message = $this->Regular_User->insert_regular_user($user_data);
 			$data = array(
 				'status_message' => $status_message 
 				);
@@ -95,8 +95,9 @@ class Main_Controller extends CI_Controller {
     */
 	public function enterGame() {
 		$user_data = $this->session->userdata('userlogin');
-		$high_score = $this->User_Model->get_high_score($user_data);
-    	$last_score = $this->User_Model->get_last_score($user_data);
+		$this->load->model('Regular_User');
+		$high_score = $this->Regular_User->get_high_score($user_data);
+    	$last_score = $this->Regular_User->get_last_score($user_data);
 		$data = array(
  			'high_score'=>$high_score,
  			'last_score'=>$last_score
