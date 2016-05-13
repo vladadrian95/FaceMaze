@@ -65,15 +65,24 @@ class Main_Controller extends CI_Controller {
 		$this->form_validation->set_rules('pass', 'Password', 'trim|required');
 		$this->form_validation->set_rules('confirmpwd', 'Password', 'trim|required');
 
+		$pass1 = $this->input->post('pass');
+		$pass2 = $this->input->post('confirmpwd');
+
 		if ($this->form_validation->run() == false) {
 			$this->load->view('login_view');
-		} else {
+		} else if ($pass1 === $pass2) {
 			$user_data = array(
 				'mail' => $this->input->post('register_email'),
-				'password' => $this->input->post('pass'),
+				'password' => $pass1,
 				'username' => $this->input->post('register_user') 
 				);
 			$status_message = $this->User_Model->insert_regular_user($user_data);
+			$data = array(
+				'status_message' => $status_message 
+				);
+			$this->load->view('post_register_view', $data);
+		} else {
+			$status_message = 'Password and Confirm Password fields do not match';
 			$data = array(
 				'status_message' => $status_message 
 				);

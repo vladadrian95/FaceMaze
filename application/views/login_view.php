@@ -59,7 +59,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 
 		</form>
-		<form id="registerForm" name="registerForm" class="customForm" action="register.php" method="post" style="display:none;">
+		<form id="registerForm" name="registerForm" class="customForm" action="<?php echo 'http://localhost/FaceMaze/index.php/Main_Controller/register'; ?>" method="post" style="display:none;">
 			<div>
 				<input type="text" id="register_user" name="register_user" placeholder="Username">
 				<input type="text" id="register_email" name="register_email" placeholder="E-mail">
