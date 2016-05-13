@@ -118,3 +118,19 @@ body{
 .button1Active:hover {
 	background-color: rgba(255,193,37,0.5);	
 }
+
+.backBttn {
+	background-color: #e7e7e7; 
+	border: none;
+	padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+	font-size: 16px;
+	border-radius: 8px;
+}
+
+.backBttn:hover {
+	background-color: #555555;
+	color: white;
+}

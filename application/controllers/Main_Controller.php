@@ -32,6 +32,7 @@ class Main_Controller extends CI_Controller {
 		$this->load->helper('url'); 
 		$this->form_validation->set_rules('email','Email', 'trim|required'); 
 		$this->form_validation->set_rules('password','Password', 'trim|required'); 
+
 		if ($this->form_validation->run() == false){ 
 			$this->load->view('login_view');
 		} else { 
@@ -49,6 +50,35 @@ class Main_Controller extends CI_Controller {
 				$this->load->view('login_view');
 			}
 		} 
+	}
+
+    /**
+    * Handles the register process
+    * It will load a view that will display the result (succesful or why not)
+    */
+	public function register() {
+		$this->load->library('session');
+		$this->load->library('form_validation');
+		$this->load->helper('url');
+		$this->form_validation->set_rules('register_user','Username', 'trim|required');
+		$this->form_validation->set_rules('register_email','Email', 'trim|required');
+		$this->form_validation->set_rules('pass', 'Password', 'trim|required');
+		$this->form_validation->set_rules('confirmpwd', 'Password', 'trim|required');
+
+		if ($this->form_validation->run() == false) {
+			$this->load->view('login_view');
+		} else {
+			$user_data = array(
+				'mail' => $this->input->post('register_email'),
+				'password' => $this->input->post('pass'),
+				'username' => $this->input->post('register_user') 
+				);
+			$status_message = $this->User_Model->insert_regular_user($user_data);
+			$data = array(
+				'status_message' => $status_message 
+				);
+			$this->load->view('post_register_view', $data);
+		}
 	}
 
     /**
