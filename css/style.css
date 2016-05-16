@@ -134,3 +134,8 @@ body{
 	background-color: #555555;
 	color: white;
 }
+
+
+.status_msg{
+	padding: 25px;
+}
