@@ -103,6 +103,11 @@ class Main_Controller extends CI_Controller {
  			'last_score'=>$last_score
  			);
  		$this->load->view('game_view', $data);
+ 		/////FOR TESTING/////////////////////////
+ 	    $this->load->model('Labyrinth_Generator');
+   		$this->Labyrinth_Generator->GenerateMaze();
+   		$this->Labyrinth_Generator->getMaze();
+   		/////////////////////////////////////////	
 	}
 
     /**
