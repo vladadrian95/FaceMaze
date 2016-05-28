@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <!DOCTYPE html>
 
-<html xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
 	<title>FaceMaze</title>
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu" />
@@ -18,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<span class"clear"></span>
 	<form id="gotoForm" class="customForm" action="<?php echo 'http://localhost/FaceMaze/index.php/Main_Controller/index'; ?>">
 		<div id="submitButton" class="sim-button button1">
-				<a href="javascript:document.gotoForm.submit();"><span>Back to login page</span></a> 
+				<a href="#" onClick="document.forms['gotoForm'].submit();return false;"><span>Back to login page</span></a> 
 		</div>
     </form>
 	</div>

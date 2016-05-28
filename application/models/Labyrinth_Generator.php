@@ -245,12 +245,15 @@ class Labyrinth_Generator extends CI_Model {
     }
 
     public function getMaze(){
+        $labyrinth = array();
     	for ($i=0;$i<33;$i++){
+            $row = "";
     		for ($j=0;$j<33;$j++){
-    			echo $this->maze[$i][$j];
+    			$row = $row . strval($this->maze[$i][$j]);
     		}
-    		echo "<br>";
+    		array_push($labyrinth, $row);
     	}
+        return $labyrinth;
     }
 }
 

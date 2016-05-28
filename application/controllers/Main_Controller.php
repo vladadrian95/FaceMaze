@@ -43,7 +43,7 @@ class Main_Controller extends CI_Controller {
 			$login_result = $this->Regular_User->login($user_data);
 			if ($login_result === "1") {
 				$this->session->set_userdata('userlogin',$user_data);
-				$this->enterGame();
+				$this->load->view('game_view');
 			}
 			else {
 				$this->load->view('login_view');
@@ -91,26 +91,6 @@ class Main_Controller extends CI_Controller {
 	}
 
     /**
-    * Loads the game view and sets up data based on session information
-    */
-	public function enterGame() {
-		$user_data = $this->session->userdata('userlogin');
-		$this->load->model('Regular_User');
-		$high_score = $this->Regular_User->get_high_score($user_data);
-    	$last_score = $this->Regular_User->get_last_score($user_data);
-		$data = array(
- 			'high_score'=>$high_score,
- 			'last_score'=>$last_score
- 			);
- 		$this->load->view('game_view', $data);
- 		/////FOR TESTING/////////////////////////
- 	    $this->load->model('Labyrinth_Generator');
-   		$this->Labyrinth_Generator->GenerateMaze();
-   		$this->Labyrinth_Generator->getMaze();
-   		/////////////////////////////////////////	
-	}
-
-    /**
     * Handles the logout process
     * Clears all data in session
     */
@@ -118,5 +98,16 @@ class Main_Controller extends CI_Controller {
 		$this->load->library('session');
 		$this->session->unset_userdata('userlogin'); 
 		$this->index();
+	}
+
+    /**
+    * Function used for AJAX requests by the
+    * game
+    */
+	public function start_game() {
+		$this->load->model('Labyrinth_Generator');
+   		$this->Labyrinth_Generator->GenerateMaze();
+   		$labyrinth = $this->Labyrinth_Generator->getMaze();
+   		echo json_encode($labyrinth);
 	}
 }
