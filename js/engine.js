@@ -13,7 +13,9 @@ var Engine = (function(global) {
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         lastTime,
-        labyrinthMatrix = null;
+        labyrinthMatrix = null,
+        bestScore, 
+        lastScore;
 
     canvas.width = 1056; //32px * 33
     canvas.height = 1056; //32px * 33
@@ -41,9 +43,9 @@ var Engine = (function(global) {
      * game
      */
     function init() {
+        requestLabyrinth();
         reset();
         lastTime = Date.now();
-        requestLabyrinth();
         main();
     }
 
@@ -148,7 +150,29 @@ var Engine = (function(global) {
      * For now is empty
      */
     function reset() {
-        // noop
+        var httpRequest = new XMLHttpRequest();
+        if (!httpRequest) {
+            console.log('Can not create XMLHttpRequest object');
+        }
+        httpRequest.onreadystatechange = function() {
+            try {
+                if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                  if (httpRequest.status === 200) {
+                    var scores = JSON.parse(httpRequest.responseText);
+                    bestScore = scores[0];
+                    lastScore = scores[1];
+                    document.getElementById("best_score").innerHTML = "Best score is " + bestScore;
+                    document.getElementById("last_score").innerHTML = "Last score is " + lastScore;
+                  } else {
+                    console.log('There was a problem with the request');
+                  }
+                }
+            } catch( e ) {
+                console.log('Caught Exception: ' + e.description);
+            }
+        }
+        httpRequest.open('GET', 'http://localhost/FaceMaze/index.php/Main_Controller/get_score', true);
+        httpRequest.send(null);
     }
 
     /* Load all the images that the game needs and

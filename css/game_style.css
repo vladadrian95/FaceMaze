@@ -1,10 +1,60 @@
 html, body {
 	background-color: darkorange;
+	overflow: hidden; /*  Disable scrollbars */
+	display: inline;
+	font-family: Ubuntu;
+}
+
+.right {
+	display: block;
+	float: left;
+	width: 25%;
+}
+
+.high_score_text {
+	background-color: white;
+	width: 150px;
+	margin-bottom: 0px;
 	text-align: center;
-	width: 100%;
+	border-top-left-radius: 25px;
+	border-top-right-radius: 25px;
+}
+
+.last_score_text {
+	background-color: white;
+	width: 150px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	text-align: center;
+	padding-bottom: 5px;
+}
+
+.form_style {
+	margin-top: -2px;
+}
+
+.logout_button {
+	background-color: white;
+	width: 150px;
+	margin-top: 0px;
+	text-align: center;
+	border: none;
+	border-bottom-right-radius: 25px;
+	border-bottom-left-radius: 25px;
+	font-family: Ubuntu;
+	font-size: 16px;
+}
+
+.logout_button:hover {
+	background-color: lightgrey;
+}
+
+canvas {
+	text-align: center;
+	width: 75%;
 	height: 100%;
 	margin: 0px;
 	border: 0;
-	overflow: hidden; /*  Disable scrollbars */j
 	display: block;  /* No floating content on sides */
+	float: center;
 }

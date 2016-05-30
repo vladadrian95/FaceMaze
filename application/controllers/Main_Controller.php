@@ -42,8 +42,20 @@ class Main_Controller extends CI_Controller {
 			$this->load->model('Regular_User');
 			$login_result = $this->Regular_User->login($user_data);
 			if ($login_result === "1") {
+
+				//set session for user
 				$this->session->set_userdata('userlogin',$user_data);
-				$this->load->view('game_view');
+
+				$this->load->model('Regular_User');
+				$high_score = $this->Regular_User->get_high_score($user_data);
+    			$last_score = $this->Regular_User->get_last_score($user_data);
+				$user_scores = array(
+ 					'high_score'=>$high_score,
+ 					'last_score'=>$last_score
+ 				);
+ 				$this->session->set_userdata('userscores', $user_scores);
+
+ 				$this->load->view('game_view');
 			}
 			else {
 				$this->load->view('login_view');
@@ -96,18 +108,32 @@ class Main_Controller extends CI_Controller {
     */
 	public function logout() {
 		$this->load->library('session');
-		$this->session->unset_userdata('userlogin'); 
+		$this->session->sess_destroy();
 		$this->index();
 	}
 
     /**
     * Function used for AJAX requests by the
-    * game
+    * game to get a random labyrinth
     */
 	public function start_game() {
 		$this->load->model('Labyrinth_Generator');
    		$this->Labyrinth_Generator->GenerateMaze();
    		$labyrinth = $this->Labyrinth_Generator->getMaze();
+
    		echo json_encode($labyrinth);
+	}
+
+    /**
+    * Function used for AJAX requests by the 
+    * game to get user's score
+    */
+	public function get_score() {
+		$this->load->library('session');
+		$scores = $this->session->userdata('userscores');
+
+		$data = array($scores['high_score'], $scores['last_score']);
+
+		echo json_encode($data);
 	}
 }
