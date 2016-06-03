@@ -60,6 +60,7 @@ var Engine = (function(global) {
                 if (httpRequest.readyState === XMLHttpRequest.DONE) {
                   if (httpRequest.status === 200) {
                     labyrinthMatrix = JSON.parse(httpRequest.responseText);
+                    labyrinth.loadMatrix(labyrinthMatrix); //load the matrix to the Labyrinth object in app.js
                     render(); //use render() as callback method
                   } else {
                     console.log('There was a problem with the request');
@@ -100,16 +101,16 @@ var Engine = (function(global) {
     }
 
     function update(dt) {
-        //updateEntities(dt);
+        updateEntities(dt);
     }
 
     /* Update all the enemies and the player
      */
     function updateEntities(dt) {
-        allEnemies.forEach(function(enemy) {
-            enemy.update(dt);
-        });
-        player.update();
+        //allEnemies.forEach(function(enemy) {
+        //    enemy.update(dt);
+        //});
+        player.update(dt);
     }
 
     /* Renders the game
@@ -135,13 +136,13 @@ var Engine = (function(global) {
             }
         }
 
-        //renderEntities();
+        renderEntities();
     }
 
     function renderEntities() {
-        allEnemies.forEach(function(enemy) {
-            enemy.render();
-        });
+        //allEnemies.forEach(function(enemy) {
+         //   enemy.render();
+        //});
 
         player.render();
     }
