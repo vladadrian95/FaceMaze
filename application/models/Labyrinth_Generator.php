@@ -238,7 +238,7 @@ class Labyrinth_Generator extends CI_Model {
                         for ($k=0;$k<count($fill);$k++)
                             $this->maze[$fill[$k]][$j]=1;
                 }
-        $this->maze[19][16]=2;
+        $this->maze[19][16]=0;
         $this->maze[17][16]=$this->maze[16][16]=$this->maze[15][16]=$this->maze[17][15]=
         		$this->maze[17][17]=$this->maze[16][17]=$this->maze[16][15]=$this->maze[14][16]=
                 $this->maze[15][17]=$this->maze[15][15]=0;

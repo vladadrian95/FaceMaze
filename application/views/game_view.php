@@ -15,7 +15,7 @@
    </div>
    <span>
       <script src="<?php echo base_url(); ?>js/resources.js"></script>
-      <!--<script src="<?php echo base_url(); ?>js/app.js"></script>-->
+      <script src="<?php echo base_url(); ?>js/app.js"></script>
       <script src="<?php echo base_url(); ?>js/engine.js"></script>
    </span>
 </body>
