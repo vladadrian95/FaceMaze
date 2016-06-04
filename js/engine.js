@@ -61,6 +61,7 @@ var Engine = (function(global) {
                   if (httpRequest.status === 200) {
                     labyrinthMatrix = JSON.parse(httpRequest.responseText);
                     labyrinth.loadMatrix(labyrinthMatrix); //load the matrix to the Labyrinth object in app.js
+                    balls.setMatrix(labyrinthMatrix);
                     render(); //use render() as callback method
                   } else {
                     console.log('There was a problem with the request');
@@ -107,9 +108,9 @@ var Engine = (function(global) {
     /* Update all the enemies and the player
      */
     function updateEntities(dt) {
-        //allEnemies.forEach(function(enemy) {
-        //    enemy.update(dt);
-        //});
+        allEnemies.forEach(function(enemy) {
+            enemy.update(dt);
+        });
         player.update(dt);
     }
 
@@ -129,9 +130,11 @@ var Engine = (function(global) {
 
         for (row = 0; row < numRows; row++) {
             for (col = 0; col < numCols; col++) {
-                if (labyrinthMatrix[row].charAt(col) === '0')
+                if (labyrinthMatrix[row].charAt(col) === '0' || labyrinthMatrix[row].charAt(col) === '2'){
+                    //ctx.drawImage(Resources.get(rowImages[2]), col * 32,row * 32);
                     ctx.drawImage(Resources.get(rowImages[0]), col * 32,row * 32);
-                else
+                  }
+                else if (labyrinthMatrix[row].charAt(col)==='1')
                     ctx.drawImage(Resources.get(rowImages[1]), col * 32, row * 32);
             }
         }
@@ -140,9 +143,12 @@ var Engine = (function(global) {
     }
 
     function renderEntities() {
-        //allEnemies.forEach(function(enemy) {
-         //   enemy.render();
-        //});
+        balls.ballsArray.forEach(function(ball){
+          ball.render();
+        });
+        allEnemies.forEach(function(enemy) {
+            enemy.render();
+        });
 
         player.render();
     }
