@@ -136,4 +136,81 @@ class Main_Controller extends CI_Controller {
 
 		echo json_encode($data);
 	}
+
+    /**
+    * Handles login process using Facebook account
+    */
+	public function fb_login() {
+		$this->load->library('session');
+		if ($this->session->userdata('fb_data')) {
+			$user_data = $this->session->userdata('fb_data');
+			$this->load->model('Fb_User');
+			$this->Fb_User->insert_facebook_user($user_data);
+			$high_score = $this->Fb_User->get_high_score($user_data);
+    		$last_score = $this->Fb_User->get_last_score($user_data);
+			$user_scores = array(
+ 				'high_score'=>$high_score,
+ 				'last_score'=>$last_score
+ 			);
+ 			$this->session->set_userdata('userscores', $user_scores);
+
+ 			$this->load->view('game_view');
+		} else {
+			$this->load->library('Fb_Login');
+		}
+	}
+
+	/**
+    * Twitter login by redirecting the user to Twitter for authentication
+    * and then calls the callback function to redirect the user back to
+    * our website
+    */
+	public function twitter_login() {
+		$this->load->library('twconnect');
+		$redirect_code = $this->twconnect->twredirect('Main_Controller/callback');
+
+		if (!$redirect_code) {
+			$return_message = 'There was a problem with Twitter authentication';
+			$data = array(
+				'status_message' => $return_message 
+				);
+			$this->load->view('post_register_view', $data);
+		}
+	}
+
+    /**
+    * Return point from Twitter
+    */
+	public function callback() {
+		$this->load->library('twconnect');
+		$callback_code = $this->twconnect->twprocess_callback();
+
+        //Login process worked! Yeeeeeey
+		if ($callback_code) {
+			// saves Twitter user information to $this->twconnect->tw_user_info
+			// twaccount_verify_credentials returns the same information
+			$this->twconnect->twaccount_verify_credentials(); //GET account/verify_credentials
+
+            $user_data = array(
+				'id'=>$this->twconnect->tw_user_info->id,
+				'real_name'=>$this->twconnect->tw_user_info->name
+				);
+			$this->load->model("Tw_User");
+	        $this->Tw_User->insert_twitter_user($user_data);
+	        $high_score = $this->Tw_User->get_high_score($user_data);
+			$last_score = $this->Tw_User->get_last_score($user_data);
+			$user_scores = array(
+ 				'high_score'=>$high_score,
+ 				'last_score'=>$last_score
+ 			);
+ 			$this->session->set_userdata('userscores', $user_scores);
+			$this->load->view('game_view');
+		} else {
+			$return_message = 'Twitter connection failed';
+			$data = array(
+				'status_message' => $return_message 
+				);
+			$this->load->view('post_register_view', $data);
+		}
+	}
 }

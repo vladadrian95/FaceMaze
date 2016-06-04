@@ -47,11 +47,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<input type="password" id="password" name="password" placeholder="Password">
 			</div>
 			<div id="facebookLogin" class="sim-button button1">
-				<a href="fbconfig.php"><span>Facebook</span></a> 
+				<a href="<?php echo 'http://localhost/FaceMaze/index.php/Main_Controller/fb_login'; ?>"><span>Facebook</span></a> 
 			</div>
 			<span class"clear"></span>
 			<div id="twitterLogin" class="sim-button button1">
-				<a href="process.php"><span>Twitter</span></a> 
+				<a href="<?php echo 'http://localhost/FaceMaze/index.php/Main_Controller/twitter_login'; ?>"><span>Twitter</span></a> 
 			</div>
 			<span class"clear"></span>
 			<div id="submitButton" class="sim-button button1">
