@@ -183,7 +183,9 @@ var Engine = (function(global) {
     Resources.load([
         'http://localhost/FaceMaze/images/free.png',
         'http://localhost/FaceMaze/images/wall.png',
-        'http://localhost/FaceMaze/images/pacman.png'
+        'http://localhost/FaceMaze/images/pacman.png',
+        'http://localhost/FaceMaze/images/ghost.png',
+        'http://localhost/FaceMaze/images/ball.png'
     ]);
     Resources.onReady(init)
 
