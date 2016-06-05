@@ -144,6 +144,7 @@ class Main_Controller extends CI_Controller {
 	public function post_score() {
 		$score = $this->input->post('scoreValue');
 		$this->load->library('session');
+		$this->session->unset_userdata('userscores');
 		if ($this->session->userdata('userlogin')) {
 			$user_data = $this->session->userdata('userlogin');
 			$data = array(
@@ -153,6 +154,15 @@ class Main_Controller extends CI_Controller {
 			$this->load->model('Regular_User');
 			$this->Regular_User->update_last_score($data);
 			$this->Regular_User->update_high_score($data);
+
+            $high_score = $this->Regular_User->get_high_score($user_data);
+    		$last_score = $this->Regular_User->get_last_score($user_data);
+			$user_scores = array(
+ 				'high_score'=>$high_score,
+ 				'last_score'=>$last_score
+ 			);
+ 			$this->session->set_userdata('userscores', $user_scores);
+
 		} else if ($this->session->userdata('fb_data')) {
 			$user_data = $this->session->userdata('fb_data');
 			$data = array(
@@ -162,6 +172,15 @@ class Main_Controller extends CI_Controller {
 			$this->load->model('Fb_User');
 			$this->Fb_User->update_last_score($data);
 			$this->Fb_User->update_high_score($data);
+
+			$high_score = $this->Fb_User->get_high_score($user_data);
+    		$last_score = $this->Fb_User->get_last_score($user_data);
+			$user_scores = array(
+ 				'high_score'=>$high_score,
+ 				'last_score'=>$last_score
+ 			);
+ 			$this->session->set_userdata('userscores', $user_scores);
+
 		} else if ($this->session->userdata('twid')) {
 			$user_data = $this->session->userdata('twid');
 			$data = array(
@@ -171,6 +190,15 @@ class Main_Controller extends CI_Controller {
 			$this->load->model('Tw_User');
 			$this->Tw_User->update_last_score($data);
 			$this->Tw_User->update_high_score($data);
+
+			$high_score = $this->Tw_User->get_high_score($data);
+			$last_score = $this->Tw_User->get_last_score($data);
+			$user_scores = array(
+ 				'high_score'=>$high_score,
+ 				'last_score'=>$last_score
+ 			);
+ 			$this->session->set_userdata('userscores', $user_scores);
+
 		}
 		echo json_encode($score);
 	}

@@ -13,9 +13,7 @@ var Engine = (function(global) {
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         lastTime,
-        labyrinthMatrix = null,
-        bestScore, 
-        lastScore;
+        labyrinthMatrix = null;
 
     canvas.width = 1056; //32px * 33
     canvas.height = 1056; //32px * 33
@@ -169,10 +167,11 @@ var Engine = (function(global) {
                 if (httpRequest.readyState === XMLHttpRequest.DONE) {
                   if (httpRequest.status === 200) {
                     var scores = JSON.parse(httpRequest.responseText);
-                    bestScore = scores[0];
-                    lastScore = scores[1];
-                    document.getElementById("best_score").innerHTML = "Best score is " + bestScore;
-                    document.getElementById("last_score").innerHTML = "Last score is " + lastScore;
+                    var bestScore = "Best score is " + scores[0];
+                    var lastScore = "Last score is " + scores[1];
+                    document.getElementById("best_score").innerHTML = bestScore;
+                    document.getElementById("last_score").innerHTML = lastScore;
+                    console.log("Score reseted " + lastScore);
                   } else {
                     console.log('There was a problem with the request');
                   }
@@ -205,14 +204,11 @@ var Engine = (function(global) {
                 console.log('Caught Exception: ' + e.description);
             }
         }
-        httpRequest.open('POST', 'http://localhost/FaceMaze/index.php/Main_Controller/post_score', true);
+        httpRequest.open('POST', 'http://localhost/FaceMaze/index.php/Main_Controller/post_score', false);
         httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         httpRequest.send('scoreValue=' + scoreValue);
         resetObjects();
-        requestLabyrinth();
-        resetScore();
-        main();
-        console.log("Game reseted")
+        init();
     }
 
     /* Load all the images that the game needs and
