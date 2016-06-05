@@ -44,7 +44,7 @@ var Engine = (function(global) {
      */
     function init() {
         requestLabyrinth();
-        reset();
+        resetScore();
         lastTime = Date.now();
         main();
     }
@@ -76,6 +76,12 @@ var Engine = (function(global) {
     }
 
     function main() {
+
+        if (isGameFinished === true) {
+            labyrinthMatrix = null;
+            resetGame();
+        }
+
         /* Get our time delta information which is required for
          * smooth animation
          */
@@ -153,10 +159,7 @@ var Engine = (function(global) {
         player.render();
     }
 
-    /* This function could be used to handle game resets
-     * For now is empty
-     */
-    function reset() {
+    function resetScore() {
         var httpRequest = new XMLHttpRequest();
         if (!httpRequest) {
             console.log('Can not create XMLHttpRequest object');
@@ -180,6 +183,36 @@ var Engine = (function(global) {
         }
         httpRequest.open('GET', 'http://localhost/FaceMaze/index.php/Main_Controller/get_score', true);
         httpRequest.send(null);
+    }
+
+    //Reset the game
+    function resetGame() {
+        var scoreValue = player.score;
+        var httpRequest = new XMLHttpRequest();
+        if (!httpRequest) {
+            console.log('Can not create XMLHttpRequest object');
+        }
+        httpRequest.onreadystatechange = function() {
+            try {
+                if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                  if (httpRequest.status === 200) {
+                    console.log(JSON.parse(httpRequest.responseText));
+                  } else {
+                    console.log('There was a problem with the request');
+                  }
+                }
+            } catch( e ) {
+                console.log('Caught Exception: ' + e.description);
+            }
+        }
+        httpRequest.open('POST', 'http://localhost/FaceMaze/index.php/Main_Controller/post_score', true);
+        httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        httpRequest.send('scoreValue=' + scoreValue);
+        resetObjects();
+        requestLabyrinth();
+        resetScore();
+        main();
+        console.log("Game reseted")
     }
 
     /* Load all the images that the game needs and

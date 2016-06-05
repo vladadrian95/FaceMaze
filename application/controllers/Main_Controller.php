@@ -137,6 +137,44 @@ class Main_Controller extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	/**
+    * Function used for AJAX requests by the 
+    * game to post user's score
+    */
+	public function post_score() {
+		$score = $this->input->post('scoreValue');
+		$this->load->library('session');
+		if ($this->session->userdata('userlogin')) {
+			$user_data = $this->session->userdata('userlogin');
+			$data = array(
+				'email'=>$user_data['email'],
+				'score'=>$score
+				);
+			$this->load->model('Regular_User');
+			$this->Regular_User->update_last_score($data);
+			$this->Regular_User->update_high_score($data);
+		} else if ($this->session->userdata('fb_data')) {
+			$user_data = $this->session->userdata('fb_data');
+			$data = array(
+				'id'=>$user_data['id'],
+				'score'=>$score
+				);
+			$this->load->model('Fb_User');
+			$this->Fb_User->update_last_score($data);
+			$this->Fb_User->update_high_score($data);
+		} else if ($this->session->userdata('twid')) {
+			$user_data = $this->session->userdata('twid');
+			$data = array(
+				'id'=>$user_data,
+				'score'=>$score
+				);
+			$this->load->model('Tw_User');
+			$this->Tw_User->update_last_score($data);
+			$this->Tw_User->update_high_score($data);
+		}
+		echo json_encode($score);
+	}
+
     /**
     * Handles login process using Facebook account
     */
@@ -203,6 +241,7 @@ class Main_Controller extends CI_Controller {
  				'high_score'=>$high_score,
  				'last_score'=>$last_score
  			);
+ 			$this->session->set_userdata('twid', $user_data['id']);
  			$this->session->set_userdata('userscores', $user_scores);
 			$this->load->view('game_view');
 		} else {

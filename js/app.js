@@ -1,4 +1,5 @@
-// Enemies our player must avoid
+
+var isGameFinished = false;
 
 //labyrinth object
 var Labyrinth = function() {
@@ -126,8 +127,11 @@ Enemy.prototype.update = function(dt) {
     }
      //collision
         if (((player.x-16)<(this.x))&&((this.x)<(player.x+16))&&
-            ((player.y-16)<(this.y))&&((this.y)<(player.y+16)))
-            alert("ai pierdut.");
+            ((player.y-16)<(this.y))&&((this.y)<(player.y+16))) {
+                alert("Game over!");
+                isGameFinished = true;
+
+        }
     if (this.direction === 0 )//Player moves north
         this.y = this.y-4;
     else if (this.direction === 1 )//Player moves south
@@ -204,8 +208,10 @@ Player.prototype.update = function(dt) {
             //labyrinth.setValue(this.x/32,this.y/32);
            // renderFree(this.x,this.y);
         }
-        if (balls.ballsArray.length < 300)
+        if (balls.ballsArray.length < 300) {
             alert("You won!");
+            isGameFinished = true;
+        }
     }
     if (this.direction === 0 )//Player moves north
         this.y = this.y-4;
@@ -215,12 +221,10 @@ Player.prototype.update = function(dt) {
     else if (this.direction === 2 )//played moves east
         this.x=this.x+4;
     else if (this.direction === 3 )//player moves west
-        this.x=this.x-4    ;
+        this.x=this.x-4;
 };
 
 //draw the player
-
-
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
@@ -255,3 +259,11 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+var resetObjects = function() {
+    isGameFinished = false;
+    labyrinth = new Labyrinth();
+    balls = new Balls();
+    player = new Player();
+    allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy(),new Enemy(),new Enemy()];
+}

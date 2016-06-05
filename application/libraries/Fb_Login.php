@@ -26,7 +26,7 @@
 		    FacebookSession::setDefaultApplication( '','' );
 		   
 		    // login helper with redirect_uri
-		    $redirect_uri = new FacebookRedirectLoginHelper('');
+		    $redirect_uri = new FacebookRedirectLoginHelper('http://localhost/FaceMaze/index.php/Main_Controller/fb_login');
 
 		    $ci = & get_instance();
 		    $ci->load->library('session');

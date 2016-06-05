@@ -136,7 +136,7 @@ class Regular_User extends CI_Model {
       if (!$conn) {
           return "Failed to connect to data base";
       }  
-      $sql = "BEGIN regular_users_pack.update_high_score(:bind1, :bind2, :bind3); END;";
+      $sql = "BEGIN regular_users_pack.update_last_score(:bind1, :bind2, :bind3); END;";
       $query = oci_parse($conn, $sql);
       oci_bind_by_name($query, ":bind1", $data['email']);
       oci_bind_by_name($query, ":bind2", $data['score']);
