@@ -23,7 +23,7 @@
 
     	public function __construct() {
     		// init app with app id and secret
-		    FacebookSession::setDefaultApplication( '','' );
+		    FacebookSession::setDefaultApplication( '1101460036587685','4ca57114c36d90e4303d93702232b0e8' );
 		   
 		    // login helper with redirect_uri
 		    $redirect_uri = new FacebookRedirectLoginHelper('http://localhost/FaceMaze/index.php/Main_Controller/fb_login');
